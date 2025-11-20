@@ -21,13 +21,13 @@ public class DoctorController {
         return doctorService.addDoctor(doctor);
     }
 
+    @GetMapping("/{id}")
+    public Doctor getDoctor(@PathVariable Long id) {
+        return doctorService.getDoctorById(id);
+    }
+
     @GetMapping("/all")
     public List<Doctor> getAllDoctors() {
         return doctorService.getAllDoctors();
-    }
-
-    @GetMapping("/{id}")
-    public Doctor getDoctorById(@PathVariable Long id) {
-        return doctorService.getDoctorById(id);
     }
 }
