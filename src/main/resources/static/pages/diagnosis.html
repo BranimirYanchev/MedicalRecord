@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Диагнози – Медицинско досие</title>
+
+    <!-- Global styles -->
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+
+    <!-- Page-specific -->
+    <link rel="stylesheet" href="../styles/pages/diagnosis.css">
+</head>
+<body class="app-body fade-in">
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" data-show="ADMIN,DOCTOR">
+        <div class="sidebar__header">
+            <div class="sidebar__logo-circle">MD</div>
+            <div class="sidebar__title-wrap">
+                <span class="sidebar__subtitle">Админ панел</span>
+                <span class="sidebar__title">Медицинско досие</span>
+            </div>
+        </div>
+
+        <nav class="sidebar__nav">
+            <a href="index.html" class="nav-link" data-show="ADMIN,DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Табло</span>
+            </a>
+            <a href="doctors.html" class="nav-link" data-show="ADMIN">
+                <span class="nav-link__dot"></span>
+                <span>Лекари</span>
+            </a>
+            <a href="patients.html" class="nav-link" data-show="ADMIN, DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Пациенти</span>
+            </a>
+            <a href="visits.html" class="nav-link" data-show="ADMIN,DOCTOR,PATIENT">
+                <span class="nav-link__dot"></span>
+                <span>Посещения</span>
+            </a>
+            <a href="diagnosis.html" class="nav-link nav-link--active" data-show="ADMIN,DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Диагнози</span>
+            </a>
+            <a href="leaves.html" class="nav-link" data-show="ADMIN,DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Болнични листове</span>
+            </a>
+            <a href="reports.html" class="nav-link" data-show="ADMIN">
+                <span class="nav-link__dot"></span>
+                <span>Справки</span>
+            </a>
+        </nav>
+
+        <div class="sidebar__footer">
+            <span class="sidebar__footer-label">Влезнал като</span>
+            <span class="sidebar__footer-role" id="roleLabel">Администратор</span>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main" data-show="ADMIN,DOCTOR">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div>
+                <h1 class="topbar__title">Диагнози</h1>
+                <p class="topbar__subtitle">Управление на поставени диагнози по посещения</p>
+            </div>
+            <div class="topbar__right">
+                <button class="btn btn--primary logout-btn">Изход</button>
+            </div>
+        </header>
+
+        <!-- PAGE GRID -->
+        <section class="page-grid">
+
+            <!-- DIAGNOSIS LIST -->
+            <div class="card card--glass slide-up" data-show="ADMIN,DOCTOR">
+                <h2 class="card__title">Списък с диагнози</h2>
+                <p class="card__subtitle">Всички диагностирани посещения</p>
+
+                <table class="table diagnosis-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Диагноза</th>
+                        <th>Посещение #ID</th>
+                        <th>Лекар</th>
+                        <th>Пациент</th>
+                        <th>Действия</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="diagnosisTable">
+                    <!-- JS ще попълни -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ADD DIAGNOSIS -->
+            <div class="card card--glass slide-up" style="animation-delay: 0.1s" data-show="ADMIN,DOCTOR">
+                <h2 class="card__title">Добавяне на диагноза</h2>
+                <p class="card__subtitle">Попълнете информация за посещението</p>
+
+                <form class="form" id="addDiagnosisForm">
+                    <input type="hidden" id="editId">
+
+                    <div class="form-group">
+                        <label>Наименование</label>
+                        <input type="text" id="dName" placeholder="Пример: Грип A(H1N1)">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Посещение</label>
+                        <select id="dVisit">
+                            <!-- JS ще зареди -->
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary" data-show="ADMIN,DOCTOR">
+                        Добави диагноза
+                    </button>
+
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script type="module" src="../js/diagnosis.js"></script>
+<script src="../js/core/role-guard.js"></script>
+</body>
+</html>

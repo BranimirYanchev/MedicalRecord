@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Справки – Медицинско досие</title>
+
+    <!-- Global styles -->
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+
+    <!-- Page-specific -->
+    <link rel="stylesheet" href="../styles/pages/reports.css">
+</head>
+
+<body class="app-body fade-in">
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" data-show="ADMIN">
+        <div class="sidebar__header">
+            <div class="sidebar__logo-circle">MD</div>
+            <div class="sidebar__title-wrap">
+                <span class="sidebar__subtitle">Админ панел</span>
+                <span class="sidebar__title">Медицинско досие</span>
+            </div>
+        </div>
+
+        <nav class="sidebar__nav">
+
+            <a href="index.html" class="nav-link" data-show="ADMIN,DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Табло</span>
+            </a>
+
+            <a href="doctors.html" class="nav-link" data-show="ADMIN">
+                <span class="nav-link__dot"></span>
+                <span>Лекари</span>
+            </a>
+
+            <a href="patients.html" class="nav-link" data-show="ADMIN, DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Пациенти</span>
+            </a>
+
+            <a href="visits.html" class="nav-link" data-show="ADMIN,DOCTOR,PATIENT">
+                <span class="nav-link__dot"></span>
+                <span>Посещения</span>
+            </a>
+
+            <a href="diagnosis.html" class="nav-link" data-show="ADMIN,DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Диагнози</span>
+            </a>
+
+            <a href="leaves.html" class="nav-link" data-show="ADMIN,DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Болнични листове</span>
+            </a>
+
+            <a href="reports.html" class="nav-link nav-link--active" data-show="ADMIN">
+                <span class="nav-link__dot"></span>
+                <span>Справки</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar__footer">
+            <span class="sidebar__footer-label">Влезнал като</span>
+            <span class="sidebar__footer-role" id="roleLabel">Администратор</span>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main" data-show="ADMIN">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div>
+                <h1 class="topbar__title">Справки</h1>
+                <p class="topbar__subtitle">Анализи, статистики и обобщения от системата</p>
+            </div>
+            <div class="topbar__right">
+                <button class="btn btn--primary logout-btn">Изход</button>
+            </div>
+        </header>
+
+        <!-- FILTER BASED REPORTS -->
+        <section class="card card--glass slide-up reports-section" data-show="ADMIN">
+            <h2 class="card__title">Генериране на справки</h2>
+            <p class="card__subtitle">Изберете критерии и генерирайте конкретни справки</p>
+
+            <div class="reports-flex">
+
+                <!-- a) Пациенти с диагноза -->
+                <div class="report-box">
+                    <label>Пациенти с диагноза</label>
+                    <input id="rDiagnosisName" type="text" class="input" placeholder="Пример: Грип, Корона...">
+                    <button class="btn btn--primary" onclick="reportPatientsByDiagnosis()">Покажи</button>
+
+                    <div id="rPatientsByDiagnosis" class="report-output"></div>
+                </div>
+
+                <!-- c) Пациенти при личен лекар -->
+                <div class="report-box">
+                    <label>Пациенти при личен лекар</label>
+                    <select id="rDoctorPatients" class="input"></select>
+                    <button class="btn btn--primary" onclick="reportPatientsByDoctor()">Покажи</button>
+
+                    <div id="rPatientsByDoctor" class="report-output"></div>
+                </div>
+
+                <!-- f) Посещения на пациент -->
+                <div class="report-box">
+                    <label>Посещения на пациент</label>
+                    <select id="rPatientVisits" class="input"></select>
+                    <button class="btn btn--primary" onclick="reportVisitsOfPatient()">Покажи</button>
+
+                    <div id="rVisitsOfPatient" class="report-output"></div>
+                </div>
+
+                <!-- g + h) Посещения при лекар за период -->
+                <div class="report-box">
+                    <label>Посещения при лекар за период</label>
+                    <select id="rDoctorVisitsPeriod" class="input"></select>
+
+                    <label>От дата:</label>
+                    <input type="date" id="rStart" class="input">
+
+                    <label>До дата:</label>
+                    <input type="date" id="rEnd" class="input">
+
+                    <button class="btn btn--primary" onclick="reportVisitsDoctorPeriod()">Покажи</button>
+
+                    <div id="rVisitsDoctorPeriod" class="report-output"></div>
+                </div>
+
+                <!-- g) Всички прегледи за период -->
+                <div class="report-box">
+                    <label>Всички прегледи за период</label>
+
+                    <label>От дата:</label>
+                    <input type="date" id="rAllStart" class="input">
+
+                    <label>До дата:</label>
+                    <input type="date" id="rAllEnd" class="input">
+
+                    <button class="btn btn--primary" onclick="reportVisitsInPeriod()">Покажи</button>
+
+                    <div id="rVisitsInPeriod" class="report-output"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TOP 3 REPORTS -->
+        <section class="card card--glass slide-up" style="margin-top: 20px;" data-show="ADMIN">
+            <div class="top-reports">
+
+                <div class="top-report-box">
+                    <h3 class="report-title">Най-честа диагноза</h3>
+                    <div id="mostCommonDiag" class="report-output">—</div>
+                </div>
+
+                <div class="top-report-box">
+                    <h3 class="report-title">Месец с най-много болнични</h3>
+                    <div id="monthMostLeaves" class="report-output">—</div>
+                </div>
+
+                <div class="top-report-box">
+                    <h3 class="report-title">Лекари с най-много болнични</h3>
+                    <div id="doctorsMostLeaves" class="report-output">—</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- OVERVIEW TABLE -->
+        <section class="card card--glass slide-up" style="margin-top: 20px;" data-show="ADMIN">
+            <h2 class="card__title">Обобщени данни</h2>
+            <p class="card__subtitle">Брой пациенти и посещения по лекари</p>
+
+            <table class="table reports-table">
+                <thead>
+                <tr>
+                    <th>Тип</th>
+                    <th>Описание</th>
+                    <th>Брой</th>
+                </tr>
+                </thead>
+                <tbody id="overviewTable">
+                <!-- JS -->
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+</div>
+
+<script type="module" src="../js/reports.js"></script>
+<script src="../js/core/role-guard.js"></script>
+
+</body>
+</html>

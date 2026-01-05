@@ -1,0 +1,191 @@
+/* GRID за summary cards */
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.report-card {
+    background: rgba(15, 23, 42, 0.85);
+    padding: 20px;
+    border-radius: 18px;
+    border: 1px solid rgba(148,163,184,0.25);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.report-title {
+    margin: 0 0 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.report-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.report-list li {
+    padding: 6px 4px;
+    font-size: 14px;
+    color: var(--text-soft);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.report-list li:last-child {
+    border-bottom: none;
+}
+
+/* Overview table */
+.reports-table th {
+    background: rgba(255,255,255,0.07);
+    color: var(--text-soft);
+}
+
+.reports-table td {
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Филтър секцията */
+.reports-section {
+    margin-bottom: 24px;
+}
+
+.reports-flex {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    margin-top: 18px;
+}
+
+.report-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.report-box label {
+    font-size: 0.95rem;
+    color: var(--text-soft);
+}
+
+.report-box .btn {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.report-output {
+    margin-top: 8px;
+    background: rgba(15,23,42,0.9);
+    padding: 10px;
+    border-radius: 12px;
+    min-height: 40px;
+    border: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem;
+    color: var(--text-soft);
+}
+
+/* Универсален input клас за тази страница */
+.reports-section .input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
+    color: var(--text-main);
+    outline: none;
+    transition: 0.25s;
+    font-size: 0.95rem;
+}
+
+.reports-section .input:focus {
+    border-color: var(--primary-light);
+    background: rgba(255,255,255,0.14);
+    box-shadow: 0 0 0 3px rgba(122,124,255,0.35);
+}
+
+@media (max-width: 1024px) {
+    .reports-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.top-reports {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.top-report-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.report-output {
+    margin-top: 12px;
+    padding: 10px;
+    min-height: 40px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    color: var(--text-main);
+}
+
+.reports-table {
+    width: 100%;
+    table-layout: fixed; /* 🔥 най-важното */
+    border-collapse: collapse;
+}
+
+.reports-table th,
+.reports-table td {
+    padding: 10px 12px;
+    text-overflow: ellipsis; /* ... ако няма място */
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.reports-table th:nth-child(1),
+.reports-table td:nth-child(1) {
+    width: 10%;
+}
+
+.reports-table th:nth-child(2),
+.reports-table td:nth-child(2) {
+    width: 25%;
+}
+
+.reports-table th:nth-child(3),
+.reports-table td:nth-child(3) {
+    width: 20%;
+}
+
+.reports-table th:nth-child(4),
+.reports-table td:nth-child(4) {
+    width: 25%;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;        /* 🔥 Най-важното */
+    padding-bottom: 6px;
+}
+
+.reports-table {
+    min-width: 520px;        /* 🔥 Минимална ширина за да не се смачква */
+    border-collapse: collapse;
+}
+
+.reports-table th,
+.reports-table td {
+    white-space: nowrap;     /* 🔥 Нищо не пада на нов ред */
+    padding: 10px 14px;
+}

@@ -49,4 +49,35 @@ public class MedicalVisitService {
     public List<MedicalVisit> getAllVisits() {
         return visitRepository.findAll();
     }
+
+    // ✔ UPDATE
+    public MedicalVisit updateVisit(Long id, MedicalVisit updated, Long doctorId, Long patientId) {
+
+        MedicalVisit existing = visitRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Visit not found"));
+
+        existing.setVisitDate(updated.getVisitDate());
+
+        if (doctorId != null) {
+            Doctor doctor = doctorRepository.findById(doctorId)
+                    .orElseThrow(() -> new RuntimeException("Doctor not found"));
+            existing.setDoctor(doctor);
+        }
+
+        if (patientId != null) {
+            Patient patient = patientRepository.findById(patientId)
+                    .orElseThrow(() -> new RuntimeException("Patient not found"));
+            existing.setPatient(patient);
+        }
+
+        return visitRepository.save(existing);
+    }
+
+    // ✔ DELETE
+    public void deleteVisit(Long id) {
+        if (!visitRepository.existsById(id)) {
+            throw new RuntimeException("Visit not found");
+        }
+        visitRepository.deleteById(id);
+    }
 }

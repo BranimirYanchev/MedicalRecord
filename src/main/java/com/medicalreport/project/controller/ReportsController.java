@@ -26,8 +26,8 @@ public class ReportsController {
     }
 
     @GetMapping("/most-common-diagnosis")
-    public String mostCommonDiagnosis() {
-        return reportsService.getMostCommonDiagnosis();
+    public Map<String, String> mostCommonDiagnosis() {
+        return Map.of("value", reportsService.getMostCommonDiagnosis());
     }
 
     @GetMapping("/patients-by-doctor")
@@ -79,5 +79,11 @@ public class ReportsController {
     @GetMapping("/doctors-most-leaves")
     public Map<String, Long> doctorsMostLeaves() {
         return reportsService.getDoctorsWithMostLeaves();
+    }
+
+    // 11) NEW — summary for overview table
+    @GetMapping("/overview")
+    public List<Map<String, Object>> overview() {
+        return reportsService.getOverviewData();
     }
 }

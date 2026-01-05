@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход – Медицинско досие</title>
+    <link rel="stylesheet" href="../styles/pages/login.css">
+</head>
+<body>
+
+<div class="login-wrapper">
+    <div class="login-card">
+
+        <div class="logo-circle"><span>MD</span></div>
+
+        <h2 class="title">Медицинско досие</h2>
+        <p class="subtitle">Вход в системата</p>
+
+        <form id="loginForm" onsubmit="return false;">
+            <div id="loginError" class="hidden"></div>
+
+            <div class="input-group">
+                <label>Потребителско име / ЕГН</label>
+                <input id="username" type="text" required>
+            </div>
+
+            <div class="input-group" id="passwordGroup">
+                <label>Парола</label>
+                <input id="password" type="password">
+            </div>
+
+            <div class="input-group check-inline">
+                <input type="checkbox" id="loginAsPatient">
+                <label for="loginAsPatient">Вход като пациент (ЕГН)</label>
+            </div>
+
+            <button id="loginBtn" type="button" class="btn-login">Вход</button>
+        </form>
+
+    </div>
+</div>
+
+<script type="module" src="../js/login.js"></script>
+</body>
+</html>

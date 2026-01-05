@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Медицинско досие – Административен панел</title>
+
+    <!-- Глобални стилове -->
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+
+    <!-- Стилове само за тази страница -->
+    <link rel="stylesheet" href="../styles/pages/home.css">
+</head>
+<body class="app-body">
+
+<div class="app-shell fade-in" data-show="ADMIN,DOCTOR,PATIENT">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" data-show="ADMIN,DOCTOR,PATIENT">
+        <div class="sidebar__header">
+            <div class="sidebar__logo-circle">MD</div>
+            <div class="sidebar__title-wrap">
+                <span class="sidebar__subtitle">Админ панел</span>
+                <span class="sidebar__title">Медицинско досие</span>
+            </div>
+        </div>
+
+        <nav class="sidebar__nav">
+            <a href="index.html" class="nav-link nav-link--active" data-show="ADMIN,DOCTOR,PATIENT">
+                <span class="nav-link__dot"></span>
+                <span>Табло</span>
+            </a>
+
+            <a href="doctors.html" class="nav-link" data-show="ADMIN">
+                <span class="nav-link__dot"></span>
+                <span>Лекари</span>
+            </a>
+
+            <a href="patients.html" class="nav-link" data-show="ADMIN,PATIENT, DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Пациенти</span>
+            </a>
+
+            <a href="visits.html" class="nav-link" data-show="ADMIN,DOCTOR,PATIENT">
+                <span class="nav-link__dot"></span>
+                <span>Посещения</span>
+            </a>
+
+            <a href="diagnosis.html" class="nav-link" data-show="ADMIN,DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Диагнози</span>
+            </a>
+
+            <a href="leaves.html" class="nav-link" data-show="ADMIN,DOCTOR">
+                <span class="nav-link__dot"></span>
+                <span>Болнични листове</span>
+            </a>
+
+            <a href="reports.html" class="nav-link" data-show="ADMIN">
+                <span class="nav-link__dot"></span>
+                <span>Справки</span>
+            </a>
+        </nav>
+
+        <div class="sidebar__footer" data-show="ADMIN,DOCTOR,PATIENT">
+            <span class="sidebar__footer-label">Влезнал като</span>
+            <span class="sidebar__footer-role" id="roleLabel">Администратор</span>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <main class="main" data-show="ADMIN,DOCTOR,PATIENT">
+
+        <!-- TOPBAR -->
+        <header class="topbar" data-show="ADMIN,DOCTOR,PATIENT">
+            <div>
+                <h1 class="topbar__title">Табло</h1>
+                <p class="topbar__subtitle">
+                    Управлявай лекари, пациенти, прегледи и справки от едно място.
+                </p>
+            </div>
+            <div class="topbar__right">
+                <button class="btn btn--primary logout-btn" data-show="ADMIN,DOCTOR,PATIENT">Изход</button>
+            </div>
+        </header>
+
+        <!-- QUICK STATS (Пациент не вижда статистики) -->
+        <section class="stats-grid" data-show="ADMIN,DOCTOR">
+            <div class="stat-card slide-up">
+                <span class="stat-card__label">Активни лекари</span>
+                <span class="stat-card__value">–</span>
+                <span class="stat-card__hint">Данните могат да дойдат от API-то по-късно</span>
+            </div>
+
+            <div class="stat-card slide-up" style="animation-delay: 0.05s">
+                <span class="stat-card__label">Регистрирани пациенти</span>
+                <span class="stat-card__value">–</span>
+                <span class="stat-card__hint">Историята на прегледите е достъпна в реално време</span>
+            </div>
+
+            <div class="stat-card slide-up" style="animation-delay: 0.1s">
+                <span class="stat-card__label">Днес прегледи</span>
+                <span class="stat-card__value">–</span>
+                <span class="stat-card__hint">Фокус върху натовареността по дни</span>
+            </div>
+        </section>
+
+        <!-- GRID (Потребителски роли) -->
+        <section class="home-grid">
+
+            <a href="doctors.html" class="home-card hover-lift" data-show="ADMIN">
+                <div class="home-card__icon-circle">👨‍⚕️</div>
+                <h3 class="home-card__title">Лекари</h3>
+                <p class="home-card__text">
+                    Управлявай профили на лекари, специалности и лични лекари.
+                </p>
+                <span class="home-card__link">Към модул →</span>
+            </a>
+
+            <a href="patients.html" class="home-card hover-lift" data-show="ADMIN">
+                <div class="home-card__icon-circle">🧍</div>
+                <h3 class="home-card__title">Пациенти</h3>
+                <p class="home-card__text">
+                    Регистрация на пациенти, осигуровки и лични досиета.
+                </p>
+                <span class="home-card__link">Към модул →</span>
+            </a>
+
+            <a href="visits.html" class="home-card hover-lift" data-show="ADMIN,DOCTOR,PATIENT">
+                <div class="home-card__icon-circle">📋</div>
+                <h3 class="home-card__title">Посещения</h3>
+                <p class="home-card__text">
+                    Проследявай прегледи, посещения и история на лечението.
+                </p>
+                <span class="home-card__link">Към модул →</span>
+            </a>
+
+            <a href="diagnosis.html" class="home-card hover-lift" data-show="ADMIN,DOCTOR">
+                <div class="home-card__icon-circle">🏥</div>
+                <h3 class="home-card__title">Диагнози</h3>
+                <p class="home-card__text">
+                    Управление на диагнози, кодове и обвързване с прегледи.
+                </p>
+                <span class="home-card__link">Към модул →</span>
+            </a>
+
+            <a href="leaves.html" class="home-card hover-lift" data-show="ADMIN,DOCTOR">
+                <div class="home-card__icon-circle">🗓</div>
+                <h3 class="home-card__title">Болнични</h3>
+                <p class="home-card__text">
+                    Издавани болнични, периоди и проследяване по пациенти.
+                </p>
+                <span class="home-card__link">Към модул →</span>
+            </a>
+
+            <a href="reports.html" class="home-card hover-lift" data-show="ADMIN">
+                <div class="home-card__icon-circle">📊</div>
+                <h3 class="home-card__title">Справки</h3>
+                <p class="home-card__text">
+                    Статистики, анализи и обобщения за натовареност и диагнози.
+                </p>
+                <span class="home-card__link">Към модул →</span>
+            </a>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- JS -->
+<script type="module" src="../js/index.js"></script>
+<script src="../js/core/role-guard.js"></script>
+
+</body>
+</html>

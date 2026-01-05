@@ -1,0 +1,337 @@
+/* ../styles/components.css */
+
+/* BUTTONS */
+
+.btn {
+    border-radius: 999px;
+    border: none;
+    padding: 7px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+}
+
+.btn--primary {
+    background: linear-gradient(135deg, var(--primary), #6366f1);
+    color: #f9fafb;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
+}
+
+.btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.65);
+}
+
+.btn--ghost {
+    background: rgba(15, 23, 42, 0.6);
+    color: var(--text-soft);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.btn--ghost:hover {
+    background: rgba(15, 23, 42, 0.9);
+}
+
+/* STATS */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.stat-card {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.75);
+}
+
+.stat-card__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--text-muted);
+}
+
+.stat-card__value {
+    display: block;
+    margin-top: 8px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.stat-card__hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* HOME GRID CARDS */
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 4px;
+}
+
+.home-card {
+    background: rgba(15, 23, 42, 0.96);
+    border-radius: var(--radius-md);
+    padding: 16px 16px 14px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.home-card::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle at 0 0, rgba(76, 111, 255, 0.26), transparent 55%);
+    opacity: 0;
+    transition: opacity var(--transition-med);
+}
+
+.home-card__icon-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.home-card__title {
+    margin: 0 0 6px;
+    font-size: 15px;
+}
+
+.home-card__text {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.home-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--accent);
+}
+
+/* HOVER / LIFT */
+
+.hover-lift {
+    transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med);
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+    border-color: rgba(167, 139, 250, 0.8);
+}
+
+.hover-lift:hover::before {
+    opacity: 1;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   UNIVERSAL EDIT MODAL – matches your full UI
+   works for ALL edit panels (doctor, patient, etc.)
+============================================ */
+
+#editModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#editModal.hidden {
+    display: none;
+}
+
+#editModal .modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 20px;
+    padding: 28px;
+    width: min(480px, 90vw);
+    animation: fadeUp 0.25s ease-out;
+    box-shadow: 0 14px 45px rgba(0,0,0,0.35);
+}
+
+/* Title */
+#editModalTitle {
+    color: var(--text-main);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+/* Edit form styling (same as add form) */
+#editForm .form-group {
+    margin-bottom: 22px;
+}
+
+#editForm label {
+    color: var(--text-main);
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Inputs */
+#editForm input,
+#editForm select,
+#editForm textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: 0.25s;
+}
+
+#editForm input:focus,
+#editForm select:focus,
+#editForm textarea:focus {
+    border-color: var(--primary-light);
+    background: rgba(255,255,255,0.16);
+    box-shadow: 0 0 0 3px rgba(122,124,255,0.35);
+}
+
+/* Checkbox */
+#editForm .check-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#editForm input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary);
+}
+
+/* Modal buttons */
+.modal-actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.modal-actions .btn {
+    width: auto !important;
+    padding: 10px 18px;
+}
+
+/* Cancel button — ghost style */
+.btn--ghost {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--text-main);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn--ghost:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Save button — uses your primary palette */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    border-radius: 14px;
+    padding: 12px 24px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(111,119,255,0.35);
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    border: none;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-edit:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    box-shadow: 0 6px 16px rgba(111,119,255,0.35);
+}
+
+
+.btn-danger {
+    background: #ff4e6a;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    background: #ff2f53;
+    box-shadow: 0 6px 16px rgba(255, 71, 94, 0.35);
+}

@@ -1,9 +1,12 @@
 package com.medicalreport.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Data
 public class MedicalVisit {
@@ -20,9 +23,9 @@ public class MedicalVisit {
     @ManyToOne
     private Patient patient;
 
-    @OneToOne(mappedBy = "visit", cascade = CascadeType.ALL)
-    private Diagnosis diagnosis;
+    @OneToOne(mappedBy = "visit", cascade = CascadeType.ALL, orphanRemoval = true)
+    private MedicalLeave medicalLeave;
 
     @OneToOne(mappedBy = "visit", cascade = CascadeType.ALL)
-    private MedicalLeave medicalLeave;
+    private Diagnosis diagnosis;
 }
